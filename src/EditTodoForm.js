@@ -4,13 +4,13 @@ import TextField from '@material-ui/core/TextField';
 import useInputState from './hooks/useInputState';
 
 function EditTodoForm({ id, task, toggleEditForm }) {
-    const { editTodo } = useContext(TodosContext);
+    const { dispatch } = useContext(TodosContext);
     const [value, handleChange, reset] = useInputState(task);
     return (
         <form
             onSubmit={e => {
                 e.preventDefault();
-                editTodo(id, value);
+                dispatch({ type: 'EDIT', id, editedTask: value });
                 reset();
                 toggleEditForm();
             }}
